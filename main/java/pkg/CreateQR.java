@@ -1,5 +1,8 @@
+package pkg;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +16,14 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class CreateQR {
-	public static void createQr(String key) {
+	public static String createQr(String key) {
+		String filePath = null;
 		try {
-	        String source = "key";
+	        String source = key;
 	        String encoding = "UTF-8";
 	        int size = 300;
-	        String filePath = "qr_code.png";
+	        String p1 = Paths.get("").toAbsolutePath().toString() + "/src/main/webapp/img/";
+	        filePath = p1 + "qr_code.png";
 	
 	        Map<EncodeHintType, Object> hints = new HashMap<>();
 	        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
@@ -33,5 +38,10 @@ public class CreateQR {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+		
+		return filePath;
+	}
+	
+	public static void main(String[] args) {
 	}
 }
